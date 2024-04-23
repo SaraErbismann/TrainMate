@@ -1,8 +1,5 @@
-# React + Vite
+# TrainMate
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This web application has been made as a final course project for my Front-end programming course in Haaga-Helia UAS.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The TrainMate application is a front-end app for an existing back-end for a personal trainer company.
