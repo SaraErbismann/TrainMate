@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import { Home } from './components/Home'; // Adjust the path accordingly
-import { Trainings } from './components/Trainings'; // Adjust the path accordingly
-import { Customers } from './components/Customers';
+import Home from './components/Home'; // Adjust the path accordingly
+import Trainings from './components/Trainings'; // Adjust the path accordingly
+import Customers from './components/Customers';
+import Error from './components/Error.jsx';
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
@@ -11,13 +12,14 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <Error />,
     children: [
       {
         element: <Home />,
         index: true
       },
       {
-        path: "trainigs",
+        path: "trainings",
         element: <Trainings />,
       },
       {
