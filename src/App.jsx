@@ -1,12 +1,17 @@
-
+import { Link, Outlet } from 'react-router-dom'
 import './App.css'
 
 function App() {
 
   return (
-    <>
-      <h1>Vite + React</h1>
-    </>
+    <div className='App'>
+      <nav>
+        <Link to={"/"}>Home</Link>
+        <Link to={"/trainings"}>Trainings</Link>
+        <Link to={"/customers"}>Customers</Link>
+      </nav>
+      <Outlet />
+    </div>
   )
 }
 
