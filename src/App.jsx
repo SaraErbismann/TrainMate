@@ -1,16 +1,12 @@
-import { Link, Outlet } from 'react-router-dom'
-import './App.css'
+
+import Navbar from './components/Navbar'
 
 function App() {
 
   return (
     <div className='App'>
-      <nav>
-        <Link to={"/"}>Home</Link>
-        <Link to={"/trainings"}>Trainings</Link>
-        <Link to={"/customers"}>Customers</Link>
-      </nav>
-      <Outlet />
+      <Navbar />
+
     </div>
   )
 }

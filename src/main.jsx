@@ -5,7 +5,6 @@ import Home from './components/Home'; // Adjust the path accordingly
 import Trainings from './components/Trainings'; // Adjust the path accordingly
 import Customers from './components/Customers';
 import Error from './components/Error.jsx';
-import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 const router = createBrowserRouter([
