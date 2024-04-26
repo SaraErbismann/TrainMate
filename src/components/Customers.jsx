@@ -1,9 +1,10 @@
+import { Typography } from "@mui/material";
 
 export default function Customers() {
 
     return(
         <>
-        <p>This is customers page</p>
+        <Typography variant="h1">This is customers page</Typography>
         </>
     );
 }

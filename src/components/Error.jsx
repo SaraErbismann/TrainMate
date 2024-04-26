@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { useRouteError } from "react-router-dom";
 
 export default function Error() {
@@ -7,9 +8,9 @@ export default function Error() {
 
     return(
         <>
-        <h1>Oops!</h1>
-        <p>Page not found.</p>
-        <p>{error.data}</p>
+        <Typography variant="h1">Oops!</Typography>
+        <Typography variant="body1">This is home page</Typography>
+        <Typography variant="body1">{error.data}</Typography>
         </>
     );
 }
