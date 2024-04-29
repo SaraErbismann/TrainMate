@@ -7,16 +7,16 @@ import Customers from './components/Customers';
 import Error from './components/Error.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-
+// create BrowseRouter usint the createBrowseRouter function
 const router = createBrowserRouter([
-  {
+  { //root route to render the App component
     path: "/",
     element: <App />,
     errorElement: <Error />,
     children: [
       {
         element: <Home />,
-        index: true
+        index: true //index route
       },
       {
         path: "trainings",
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
 
   </React.StrictMode>
 )

@@ -8,23 +8,30 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link, Outlet } from 'react-router-dom';
 
 export default function Navbar() {
-    console.log("this is from Navbar component");
+    
+    //Sate to manage anchor element for responsive menu
     const [anchorElNav, setAnchorElNav] = useState(null);
+
+    //Media query to check if screen size is mobile for responsive menu
     const isMobile = useMediaQuery('(max-width:600px)');
 
+    //handling opening responive navv menu
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
 
+    //handle closing responsive nav menu
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
     return (
         <div className='App'>
+            {/* App bar start */}
             <AppBar position="static">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
+                        {/* If screen is mobile, render menu icon */}
                         {isMobile && (
                             <IconButton
                                 size="large"
@@ -38,6 +45,7 @@ export default function Navbar() {
                                 <MenuIcon />
                             </IconButton>
                         )}
+                        {/* Mobile nav menu */}
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorElNav}
@@ -53,6 +61,7 @@ export default function Navbar() {
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                         >
+                            {/* Mobile menu items */}
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Link to={"/"} style={{ textDecoration: 'none', color: 'inherit' }}>Home</Link>
                             </MenuItem>
@@ -63,9 +72,11 @@ export default function Navbar() {
                                 <Link to={"/customers"} style={{ textDecoration: 'none', color: 'inherit' }}>Customers</Link>
                             </MenuItem>
                         </Menu>
+                        {/* App name in menu */}
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                             TrainMate
                         </Typography>
+                        {/* Nav links in desktop */}
                         <Stack
                             direction="row"
                             justifyContent="center"
