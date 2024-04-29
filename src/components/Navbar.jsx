@@ -5,10 +5,10 @@ import {
     Container, Stack, useMediaQuery
 }  from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import { Link, Outlet } from 'react-router-dom';
 
 export default function Navbar() {
+    console.log("this is from Navbar component");
     const [anchorElNav, setAnchorElNav] = useState(null);
     const isMobile = useMediaQuery('(max-width:600px)');
 
@@ -25,7 +25,6 @@ export default function Navbar() {
             <AppBar position="static">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <FitnessCenterIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/>
                         {isMobile && (
                             <IconButton
                                 size="large"
@@ -74,9 +73,9 @@ export default function Navbar() {
                             spacing={2}
                             sx={{ display: { xs: 'none', md: 'flex' } }}
                         >
-                            <Typography variant="body1" component={Link} to={"/"}>Home</Typography>
-                            <Typography variant="body1" component={Link} to={"/trainings"}>Trainings</Typography>
-                            <Typography variant="body1" component={Link} to={"/customers"}>Customers</Typography>
+                            <Typography style={{ textDecoration: 'none', color: 'inherit' }} variant="body1" component={Link} to={"/"}>Home</Typography>
+                            <Typography style={{ textDecoration: 'none', color: 'inherit' }} variant="body1" component={Link} to={"/trainings"}>Trainings</Typography>
+                            <Typography style={{ textDecoration: 'none', color: 'inherit' }} variant="body1" component={Link} to={"/customers"}>Customers</Typography>
                         </Stack>
                     </Toolbar>
                 </Container>
