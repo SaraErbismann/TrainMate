@@ -7,8 +7,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from "react";
 
 export default function Customers() {
-    console.log("this is a test from Customers component");
 
+    //set coldefs
    const [colDefs] = useState([
         { field: 'firstname', filter: true, width: 120},
         { field: 'lastname', filter: true, width: 100},
@@ -24,35 +24,31 @@ export default function Customers() {
         </Button>, width: 100 }*/
     ]);
 
-    const {isPending, isError, data, error} = useQuery({
+    //useQuery for customersFetch
+    const {isLoading, isSuccess, data} = useQuery({
         queryKey: ['customers'],
         queryFn: customersFetch,
     });
 
-    if (isPending) {
-        console.log("Loading...");
+    //if isLoading is true, render Loading text
+    if (isLoading) {
+        return <Typography variant="p">Loading...</Typography>
     }
 
-    if (isError) {
-        console.log("Error: " + error.message);
-    } else {
-        console.log(data);
-
-    }
-
-    console.log(data._embedded.customers);
-
+    //Note: conditional rendering: If the query has been succesfull, render AG grid, if not render no data text
     return(
         <>
         <Typography variant="h1">This is a list of customers</Typography>
-        <div className="ag-theme-material" style={{ height: 600 }}>
-            <AgGridReact
-                rowData={data._embedded.customers}
-                columnDefs={colDefs}
-                pagination={true}
-                paginationAutoPageSize={true}
-            />
-        </div>
+            {isSuccess ?
+            <div className="ag-theme-material" style={{ height: 600 }}>
+                <AgGridReact
+                    rowData={data._embedded.customers}
+                    columnDefs={colDefs}
+                    pagination={true}
+                    paginationAutoPageSize={true}
+                />
+            </div> :
+            <Typography variant="p">No data</Typography>}
         </>
     );
 }

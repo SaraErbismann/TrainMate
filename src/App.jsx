@@ -1,13 +1,20 @@
 import Navbar from './components/Navbar'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
   console.log("this is from App component");
 
   return (
-    <div className='App'>
-      <Navbar />
+    <>
+      <QueryClientProvider client={queryClient}>
+      <div className='App'>
+        <Navbar />
 
-    </div>
+      </div>
+      </QueryClientProvider>
+    </>
   )
 }
 
