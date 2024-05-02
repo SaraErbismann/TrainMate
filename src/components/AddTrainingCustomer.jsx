@@ -7,9 +7,15 @@ import {
     DialogContentText,
     DialogTitle
 } from "@mui/material";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DateTimePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
+import 'dayjs/locale/fi';
 
 export default function AddTrainingCustomer({data, handleSave}) {
+
     
     //State for dialog box to be open/closed
     const [dialogOpen, setDialogOpen] = useState(false); 
@@ -19,28 +25,22 @@ export default function AddTrainingCustomer({data, handleSave}) {
         date: '',
         activity: '',
         dutarion: '',
-        customer: ''
+        customer: data._links.customer.href
     });
 
+    
     const handleClickOpen = () => {
         setDialogOpen(true);
-        setTraining({
-            date: '',
-            activity: '',
-            dutarion: 0,
-            customer: data._links.customer.href
-        });
     }
 
     const handleClickClose = () => {
         setDialogOpen(false);
     }
 
-   /* const handleClickSave = (url) => {
-        handleSave(url)
-        .then(() => handleClickClose())
-        .catch(err => console.error(err));
-    }*/
+    const handleClickSave = () => {
+        handleSave(trainig);
+        handleClickClose();
+    }
 
     return(
         <>
@@ -51,17 +51,27 @@ export default function AddTrainingCustomer({data, handleSave}) {
             open={dialogOpen}
             onClose={handleClickClose}
             >
-                <DialogTitle>Add a new workout</DialogTitle>
+                <DialogTitle>Add a new workout for</DialogTitle>
                 <DialogContent>
                     <DialogContentText>Fill in all information and press save. Select cancel to exit witout daving.</DialogContentText>
-                    <TextField 
+                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fi">
+                        <DateTimePicker
+                            ampm={false}
+                            inputFormat="DD.MM.YYYY HH:mm"
+                            label="Date and Time"
+                            selected={trainig.date}
+                            fullWidth
+                            variant="standard"
+                            onChange={(date) => setTraining({ ...trainig, date: date.toISOString() })}
+                        />
+                    </LocalizationProvider>
+                    <TextField
                     required
                     margin="dense"
                     fullWidth
-                    variant="standard"
-                    label ="Date" 
+                    variant="standard" 
+                    label ="Date and TIme" 
                     value={trainig.date}
-                    onChange={e => setTraining({...trainig, date: e.target.value})}
                     />
                     <TextField
                     required
@@ -84,7 +94,7 @@ export default function AddTrainingCustomer({data, handleSave}) {
                 </DialogContent>
                 <DialogActions>
                     <Button variant='outlined' color='error' onClick={handleClickClose}>Cancel</Button>
-                    <Button variant='outlined' >Save</Button>
+                    <Button variant='outlined' onClick={handleClickSave} >Save</Button>
                 </DialogActions>
             </Dialog>
         </>

@@ -1,26 +1,22 @@
 
 //CUSTOMERS
 
-export const getCustomers = () => {
-    return fetch(import.meta.env.VITE_API_URL_CUSTOMERS)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Error in fething data: " + response.statusText);
-            } else {
-                return response.json();
-            }
-        })
+export const fetchCustomers = async () => {
+    const response = await fetch(import.meta.env.VITE_API_URL_CUSTOMERS);
+    if (!response.ok) {
+        throw new Error("Error in fething data: " + response.statusText);
+    } else {
+        return response.json();
+    }
 }
 
-export const getTrainingsWithCustomers = () => {
-    return fetch(import.meta.env.VITE_API_URL_TRAININGS_CUST)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Error in fething data: " + response.statusText);
-            } else {
-                return response.json();
-            }
-        })
+export const fetchTrainingsWithCustomers = async () => {
+    const response = await fetch(import.meta.env.VITE_API_URL_TRAININGS_CUST);
+    if (!response.ok) {
+        throw new Error("Error in fething data: " + response.statusText);
+    } else {
+        return response.json();
+    }
 }
 
 export const handleAddCustomers = (newCustomer) => {
@@ -68,18 +64,31 @@ export const handleDeleteCustomers = (url) => {
 }
 
 // TRAININGS
-export const handleAddTrainingToCustomer = (url) => {
+export const handleAddTrainingToCustomer = (newTraining) => {
     fetch(import.meta.env.VITE_API_URL_TRAININGS, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(url)
+        body: JSON.stringify(newTraining)
     })
         .then(response => {
             if (!response.ok) {
-                throw new Error("Error when adding a new customer: " + response.statusText);
+                throw new Error("Error when adding training to a customer: " + response.statusText);
             } else {
                 return response.json();
             }
         })
 }
 
+export const handleDeleteTraining = (url) => {
+    if (window.confirm("Are you sure you want to delete?")) {
+        fetch(url, { method: 'DELETE' })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error when deleting customer: " + response.statusText);
+                } else {
+                    return response.json();
+                }
+            })
+    }
+
+}

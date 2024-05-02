@@ -34,9 +34,8 @@ export default function AddCustomer({handleSave}) {
     }
 
     const handleClickSave = () => {
-        handleSave(customer)
-        .then(() => handleClickClose())
-        .catch(err => console.error(err));
+        handleSave(customer);
+        handleClickClose();
     }
 
     return(

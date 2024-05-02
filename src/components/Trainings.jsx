@@ -1,5 +1,6 @@
-import { Typography, Paper } from "@mui/material";
-import { getTrainingsWithCustomers } from "../fetchAPI";
+import { Typography, Paper, IconButton } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { fetchTrainingsWithCustomers, handleDeleteTraining } from "../fetchAPI";
 import { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
@@ -24,16 +25,31 @@ export default function Trainings() {
         { field: 'duration', filter: true },
         { field: 'customer.firstname', filter: true, headerName: 'Firstname' },
         { field: 'customer.lastname', filter: true, headerName: 'Lastname' },
+        { 
+            cellRenderer: params => 
+            <IconButton size="small" 
+                color="error" 
+                onClick={() => deleteTraining(params.data.id)}>
+                <DeleteIcon />
+            </IconButton>, width: 90
+        }
     ]);
 
     useEffect(() => {
-        fetchTrainingsCust();
+        fetchTrainingsCustList();
     }, []);
 
-    const fetchTrainingsCust = () => {
-        getTrainingsWithCustomers()
+    const fetchTrainingsCustList = () => {
+        fetchTrainingsWithCustomers()
         .then(data => setTrainingsCustData(data))
         .catch((err) => console.error(err));
+    }
+
+     //Fetch function calling API function to delete training
+    const deleteTraining = (url) => {
+       handleDeleteTraining(url) //imported from fetchAPI.js
+        .then(() => fetchTrainingsCustList())
+        .catch(err => console.error(err))
     }
 
     return(

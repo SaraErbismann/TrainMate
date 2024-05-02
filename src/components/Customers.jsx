@@ -7,7 +7,7 @@ import {
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
-import { getCustomers, handleAddCustomers, handleUpdateCustomers, handleDeleteCustomers } from "../fetchAPI";
+import { fetchCustomers, handleAddCustomers, handleUpdateCustomers, handleDeleteCustomers, handleAddTrainingToCustomer } from "../fetchAPI";
 import { useEffect, useState } from "react";
 import AddCustomer from "./AddCustomer";
 import EditCustomer from "./EditCustomer";
@@ -50,39 +50,42 @@ export default function Customers() {
 
     //Use useEffect hook to Fetch customer data
     useEffect(() => {
-        fetchCustomers();
+        fetchCustomersList();
     }, []);
 
     //Fetch function calling API function to fetch customer data
-    const fetchCustomers = () => {
-        getCustomers() //imported from fetchAPI.js
+    const fetchCustomersList = () => {
+        fetchCustomers() //imported from fetchAPI.js
         .then(data => setCustomerData(data._embedded.customers))
-        .catch((err) => console.error(err));
+        .catch((err) => console.error(err))
     }
 
     //Fetch function calling API function to add a new customer
     const addCustomer = (customer) => {
         handleAddCustomers(customer) //imported from fetchAPI.js
-        .then(() => fetchCustomers())
-        .catch(err => console.error(err));
+        .then(() => fetchCustomersList())
+        .catch(err => console.error(err))
     }
 
     //Fetch function calling API function to update customer data
     const updateCustomer = (url, newData) => {
         handleUpdateCustomers(url, newData) //imported from fetchAPI.js
-        .then(() => fetchCustomers())
-        .catch(err => console.error(err));
+        .then(() => fetchCustomersList())
+        .catch(err => console.error(err))
     }
 
     //Fetch function calling API function to delete customer
     const deleteCustomer = (url) => {
         handleDeleteCustomers(url) //imported from fetchAPI.js
-        .then(() => fetchCustomers())
-        .catch(err => console.error(err));
+        .then(() => fetchCustomersList())
+        .catch(err => console.error(err))
     }
 
-    const addTraining = () => {
-        console.log("Jee");
+    //Fetch function calling API function for adding training to a customer
+    const addTraining = (newTraining) => {
+        handleAddTrainingToCustomer(newTraining) //imported from fetchAPI.js
+        .then(() => fetchCustomersList())
+        .catch(err => console.error(err))
     }
 
 
