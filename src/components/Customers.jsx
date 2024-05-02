@@ -1,7 +1,8 @@
 import { 
     Paper, 
     Typography, 
-    Button
+    Button,
+    IconButton
 } from "@mui/material";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
@@ -10,6 +11,8 @@ import { getCustomers, handleAddCustomers, handleUpdateCustomers, handleDeleteCu
 import { useEffect, useState } from "react";
 import AddCustomer from "./AddCustomer";
 import EditCustomer from "./EditCustomer";
+import AddTrainingCustomer from "./AddTrainingCustomer";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 export default function Customers() {
@@ -21,23 +24,27 @@ export default function Customers() {
    const [colDefs] = useState([
         { field: 'firstname', filter: true, width: 100},
         { field: 'lastname', filter: true, width: 100},
-        { field: 'streetaddress', filter: true},
+        { field: 'streetaddress', filter: true, width: 120},
         { field: 'postcode', filter: true, width: 100},
         { field: 'city', filter: true, width: 100},
         { field: 'email', filter: true},
-        { field: 'phone', filter: true},
+        { field: 'phone', filter: true, width: 140},
+        { 
+            cellRenderer: params =>
+            <AddTrainingCustomer data={params.data} handleSave={addTraining}/>,
+
+         },
         { 
             cellRenderer: params => 
-            <EditCustomer data={params.data} updateCustomer={updateCustomer} />, 
-            width: 120 
+            <EditCustomer data={params.data} updateCustomer={updateCustomer} />, width: 90 
         },
         { 
             cellRenderer: params => 
-            <Button size="small" 
+            <IconButton size="small" 
                 color="error" 
                 onClick={() => deleteCustomer(params.data._links.customer.href)}>
-                Delete
-            </Button>, width: 100 
+                <DeleteIcon />
+            </IconButton>, width: 90
         }
     ]);
 
@@ -72,6 +79,10 @@ export default function Customers() {
         handleDeleteCustomers(url) //imported from fetchAPI.js
         .then(() => fetchCustomers())
         .catch(err => console.error(err));
+    }
+
+    const addTraining = () => {
+        console.log("Jee");
     }
 
 

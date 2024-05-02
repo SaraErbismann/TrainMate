@@ -5,8 +5,10 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle
+    DialogTitle,
+    IconButton
 } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
 import { useState } from "react";
 
 export default function EditCustomer({data, updateCustomer}) {
@@ -50,9 +52,9 @@ export default function EditCustomer({data, updateCustomer}) {
 
     return(
         <>
-            <Button variant="outlined" size="small" onClick={handleClickOpen}>
-                EDIT
-            </Button>
+            <IconButton variant="outlined" size="small" onClick={handleClickOpen}>
+                <EditIcon />
+            </IconButton>
             <Dialog 
             open={editDialogOpen}
             onClose={handleClickClose}

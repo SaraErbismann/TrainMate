@@ -1,6 +1,5 @@
-/*
-This file contains React queries. URLs are stores in .env
-*/
+
+//CUSTOMERS
 
 export const getCustomers = () => {
     return fetch(import.meta.env.VITE_API_URL_CUSTOMERS)
@@ -68,4 +67,19 @@ export const handleDeleteCustomers = (url) => {
 
 }
 
+// TRAININGS
+export const handleAddTrainingToCustomer = (url) => {
+    fetch(import.meta.env.VITE_API_URL_TRAININGS, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(url)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error when adding a new customer: " + response.statusText);
+            } else {
+                return response.json();
+            }
+        })
+}
 
