@@ -9,12 +9,12 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-export default function AddCustomer({handleSave}) {
+export default function EditCustomer({data, updateCustomer}) {
     
-    //State for add customer dialog box open/closed
-    const [addDialogOpen, setAddDialogOpen] = useState(false); 
+    //State for edit customer dialog box open/closed
+    const [editDialogOpen, setEditDialogOpen] = useState(false); 
 
-    //State for storing new customers
+    //State for storing customer ddata
     const [customer, setCustomer] = useState({
         firstname: '',
         lastname: '',
@@ -25,30 +25,39 @@ export default function AddCustomer({handleSave}) {
         phone: ''
     });
 
+    //Set row data (received as a prop) to the form 
     const handleClickOpen = () => {
-        setAddDialogOpen(true);
+        setEditDialogOpen(true);
+        setCustomer({
+            firstname: data.firstname,
+            lastname: data.lastname,
+            streetaddress: data.streetaddress,
+            postcode: data.postcode,
+            city: data.city,
+            email: data.email,
+            phone: data.phone
+        });
     }
 
     const handleClickClose = () => {
-        setAddDialogOpen(false);
+        setEditDialogOpen(false);
     }
 
     const handleClickSave = () => {
-        handleSave(customer)
-        .then(() => handleClickClose())
-        .catch(err => console.error(err));
+        updateCustomer(data._links.customer.href, customer);
+        handleClickClose();
     }
 
     return(
         <>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Add new customer
+            <Button variant="outlined" size="small" onClick={handleClickOpen}>
+                EDIT
             </Button>
             <Dialog 
-            open={addDialogOpen}
+            open={editDialogOpen}
             onClose={handleClickClose}
             >
-                <DialogTitle>Add new customer</DialogTitle>
+                <DialogTitle>Update customer info</DialogTitle>
                 <DialogContent>
                     <DialogContentText>Fill in all information and press save. Select cancel to exit witout daving.</DialogContentText>
                     <TextField 
