@@ -2,23 +2,25 @@
 This file contains React queries. URLs are stores in .env
 */
 
-//Customer data
-export async function customersFetch() {
-    const response = await fetch(import.meta.env.VITE_API_URL_CUSTOMERS);
-    const data = await response.json();
-    return data
+export const getCustomers = () => {
+    return fetch(import.meta.env.VITE_API_URL_CUSTOMERS)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error in fething data: " + response.statusText);
+            } else {
+                return response.json();
+            }
+        })
 }
 
-//TRaining data, no customer info
-export async function trainingsFetch() {
-    const response = await fetch(import.meta.env.VITE_API_URL_TRAININGS);
-    const trainData = await response.json();
-    return trainData
+export const getTrainingsWithCustomers = () => {
+    return fetch(import.meta.env.VITE_API_URL_TRAININGS_CUST)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error in fething data: " + response.statusText);
+            } else {
+                return response.json();
+            }
+        })
 }
 
-//Training data with customer info
-export async function trainingsCustFetch() {
-    const response = await fetch(import.meta.env.VITE_API_URL_TRAININGS_CUST);
-    const trainCustData = await response.json();
-    return trainCustData
-}

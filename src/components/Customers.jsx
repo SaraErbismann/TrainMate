@@ -1,12 +1,23 @@
-import { Typography } from "@mui/material";
+import { 
+    Paper, 
+    Typography, 
+    Button
+} from "@mui/material";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
-import { customersFetch } from "../fetchAPI";
-import { useQuery } from '@tanstack/react-query';
-import { useState } from "react";
+import { getCustomers } from "../fetchAPI";
+import { useEffect, useState } from "react";
+import AddCustomer from "./AddCustomer";
+
 
 export default function Customers() {
+
+    //State for edit customer dialog box open/closed
+    const [editDialogOpen, setEditDialogOpen] = useState(false); 
+
+    //State to store customer data
+    const [customerData, setCustomerData] = useState([]);
 
     //set coldefs
    const [colDefs] = useState([
@@ -24,31 +35,33 @@ export default function Customers() {
         </Button>, width: 100 }*/
     ]);
 
-    //useQuery for customersFetch
-    const {isLoading, isSuccess, data} = useQuery({
-        queryKey: ['customers'],
-        queryFn: customersFetch,
-    });
+    useEffect(() => {
+        fetchCustomers();
+    }, []);
 
-    //if isLoading is true, render Loading text
-    if (isLoading) {
-        return <Typography variant="p">Loading...</Typography>
+    const fetchCustomers = () => {
+        getCustomers()
+        .then(data => setCustomerData(data._embedded.customers))
+        .catch((err) => console.error(err));
     }
-
-    //Note: conditional rendering: If the query has been succesfull, render AG grid, if not render no data text
+    
     return(
         <>
-        <Typography variant="h1">This is a list of customers</Typography>
-            {isSuccess ?
+        <Paper>
+            <Typography variant="h1">This is a list of customers</Typography>
+            <AddCustomer />
+        </Paper>
+        <Paper>            
             <div className="ag-theme-material" style={{ height: 600 }}>
                 <AgGridReact
-                    rowData={data._embedded.customers}
+                    rowData={customerData}
                     columnDefs={colDefs}
                     pagination={true}
                     paginationAutoPageSize={true}
                 />
-            </div> :
-            <Typography variant="p">No data</Typography>}
+            </div> 
+        </Paper>
+
         </>
     );
 }
