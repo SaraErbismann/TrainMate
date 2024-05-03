@@ -1,26 +1,33 @@
 
 //CUSTOMERS
 
-export const fetchCustomers = async () => {
-    const response = await fetch(import.meta.env.VITE_API_URL_CUSTOMERS);
-    if (!response.ok) {
-        throw new Error("Error in fething data: " + response.statusText);
-    } else {
-        return response.json();
-    }
+
+
+export const fetchCustomers = () => {
+    return fetch(import.meta.env.VITE_API_URL_CUSTOMERS)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error in fething data: " + response.statusText);
+            } else {
+                return response.json();
+            }
+        })
 }
 
-export const fetchTrainingsWithCustomers = async () => {
-    const response = await fetch(import.meta.env.VITE_API_URL_TRAININGS_CUST);
-    if (!response.ok) {
-        throw new Error("Error in fething data: " + response.statusText);
-    } else {
-        return response.json();
-    }
+export const fetchTrainingsWithCustomers = () => {
+    return fetch(import.meta.env.VITE_API_URL_TRAININGS_CUST)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error in fething data: " + response.statusText);
+            } else {
+                return response.json();
+            }
+        })
+
 }
 
 export const handleAddCustomers = (newCustomer) => {
-    fetch(import.meta.env.VITE_API_URL_CUSTOMERS, {
+    return fetch(import.meta.env.VITE_API_URL_CUSTOMERS, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newCustomer)
@@ -35,7 +42,7 @@ export const handleAddCustomers = (newCustomer) => {
 }
 
 export const handleUpdateCustomers = (url, newData) => {
-    fetch(url, {
+    return fetch(url, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newData)
@@ -51,7 +58,7 @@ export const handleUpdateCustomers = (url, newData) => {
 
 export const handleDeleteCustomers = (url) => {
     if (window.confirm("Are you sure you want to delete?")) {
-        fetch(url, { method: 'DELETE' })
+        return fetch(url, { method: 'DELETE' })
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Error when deleting customer: " + response.statusText);
@@ -65,7 +72,7 @@ export const handleDeleteCustomers = (url) => {
 
 // TRAININGS
 export const handleAddTrainingToCustomer = (newTraining) => {
-    fetch(import.meta.env.VITE_API_URL_TRAININGS, {
+    return fetch(import.meta.env.VITE_API_URL_TRAININGS, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newTraining)
@@ -81,7 +88,7 @@ export const handleAddTrainingToCustomer = (newTraining) => {
 
 export const handleDeleteTraining = (url) => {
     if (window.confirm("Are you sure you want to delete?")) {
-        fetch(url, { method: 'DELETE' })
+        return fetch(import.meta.env.VITE_API_URL_TRAININGS + "/" + url, { method: 'DELETE' })
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Error when deleting customer: " + response.statusText);

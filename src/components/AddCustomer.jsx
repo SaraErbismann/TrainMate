@@ -10,6 +10,8 @@ import {
 import { useState } from "react";
 
 export default function AddCustomer({handleSave}) {
+
+
     
     //State for add customer dialog box open/closed
     const [addDialogOpen, setAddDialogOpen] = useState(false); 
@@ -31,12 +33,16 @@ export default function AddCustomer({handleSave}) {
 
     const handleClickClose = () => {
         setAddDialogOpen(false);
+        console.log("PING: handle click close: " + addDialogOpen);
     }
 
     const handleClickSave = () => {
-        handleSave(customer);
+        handleSave(customer)
         handleClickClose();
+        console.log("PING: handle click save " + addDialogOpen);
     }
+
+    
 
     return(
         <>
