@@ -8,6 +8,7 @@ import {
     DialogTitle
 } from "@mui/material";
 import { useState } from "react";
+import AddIcon from '@mui/icons-material/Add';
 
 export default function AddCustomer({handleSave}) {
     
@@ -47,8 +48,8 @@ export default function AddCustomer({handleSave}) {
 
     return(
         <>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Add new customer
+            <Button variant="outlined" onClick={handleClickOpen} startIcon={<AddIcon/>}>
+                Add new
             </Button>
             <Dialog 
             open={addDialogOpen}

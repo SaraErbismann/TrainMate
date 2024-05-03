@@ -5,13 +5,15 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle
+    DialogTitle,
+    IconButton
 } from "@mui/material";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
 import 'dayjs/locale/fi';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 export default function AddTrainingCustomer({data, handleSave}) {
 
@@ -45,9 +47,9 @@ export default function AddTrainingCustomer({data, handleSave}) {
 
     return(
         <>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Add workout
-            </Button>
+            <IconButton variant="outlined" onClick={handleClickOpen} >
+                <AddCircleOutlineIcon/>
+            </IconButton>
             <Dialog 
             open={dialogOpen}
             onClose={handleClickClose}

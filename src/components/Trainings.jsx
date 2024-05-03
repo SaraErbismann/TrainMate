@@ -31,7 +31,7 @@ export default function Trainings() {
                 color="error" 
                 onClick={() => deleteTraining(params.data.id)}>
                 <DeleteIcon />
-            </IconButton>, width: 90
+            </IconButton>, width: 90, headerName: 'Delete'
         }
     ]);
 

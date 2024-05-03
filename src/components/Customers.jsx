@@ -13,6 +13,8 @@ import AddCustomer from "./AddCustomer";
 import EditCustomer from "./EditCustomer";
 import AddTrainingCustomer from "./AddTrainingCustomer";
 import DeleteIcon from '@mui/icons-material/Delete';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import { CSVLink } from "react-csv";
 
 
 export default function Customers() {
@@ -22,29 +24,29 @@ export default function Customers() {
 
     //set coldefs
    const [colDefs] = useState([
-        { field: 'firstname', filter: true, width: 100},
-        { field: 'lastname', filter: true, width: 100},
-        { field: 'streetaddress', filter: true, width: 120},
+        { field: 'firstname', filter: true, width: 125, headerName: 'First name'},
+        { field: 'lastname', filter: true, width: 125, headerName: 'Last name'},
+        { field: 'streetaddress', filter: true, width: 160, headerName: 'Address'},
         { field: 'postcode', filter: true, width: 100},
-        { field: 'city', filter: true, width: 100},
-        { field: 'email', filter: true},
+        { field: 'city', filter: true, width: 120},
+        { field: 'email', filter: true, width: 170},
         { field: 'phone', filter: true, width: 140},
         { 
             cellRenderer: params =>
-            <AddTrainingCustomer data={params.data} handleSave={addTraining}/>,
+            <AddTrainingCustomer data={params.data} handleSave={addTraining}/>, width: 130, headerName: 'New training'
 
          },
         { 
             cellRenderer: params => 
-            <EditCustomer data={params.data} updateCustomer={updateCustomer} />, width: 90 
+            <EditCustomer data={params.data} updateCustomer={updateCustomer} />, width: 85, headerName: 'Edit' 
         },
         { 
             cellRenderer: params => 
             <IconButton size="small" 
                 color="error" 
-                onClick={() => deleteCustomer(params.data._links.customer.href)}>
+                onClick={() => deleteCustomer(params.data._links.customer.href)}> 
                 <DeleteIcon />
-            </IconButton>, width: 90
+            </IconButton>, width: 85, headerName: 'Delete'
         }
     ]);
 
@@ -88,12 +90,27 @@ export default function Customers() {
         .catch(err => console.error(err))
     }
 
+    const exportData = [
+        ['Firstname', 'Lastname', 'Streetaddress', 'Postcode', 'City', 'Email', 'Phone'],
+        ...customerData.map(({ firstname, lastname, streetaddress, postcode, city, email, phone }) => [
+            firstname,
+            lastname,
+            streetaddress,
+            postcode,
+            city,
+            email,
+            phone,
+        ]),
+    ];
 
     return(
         <>
         <Paper>
             <Typography variant="h1">This is a list of customers</Typography>
             <AddCustomer handleSave={addCustomer} />
+            <CSVLink data={exportData} filename="Customer_Data.csv" >
+                <Button variant="outlined" startIcon={<FileDownloadIcon />}>Export</Button>
+            </CSVLink> 
         </Paper>
         <Paper>            
             <div className="ag-theme-material" style={{ height: 600 }}>
