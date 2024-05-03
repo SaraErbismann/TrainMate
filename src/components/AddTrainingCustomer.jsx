@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
 import 'dayjs/locale/fi';
@@ -28,15 +27,17 @@ export default function AddTrainingCustomer({data, handleSave}) {
         customer: data._links.customer.href
     });
 
-    
+    //callback function to set dialog box open
     const handleClickOpen = () => {
         setDialogOpen(true);
     }
 
+    //callback function to set dialog box closed
     const handleClickClose = () => {
         setDialogOpen(false);
     }
 
+    //callback function to call handleSave function and close dialog box when save is clicked
     const handleClickSave = () => {
         handleSave(trainig);
         handleClickClose();
@@ -51,10 +52,10 @@ export default function AddTrainingCustomer({data, handleSave}) {
             open={dialogOpen}
             onClose={handleClickClose}
             >
-                <DialogTitle>Add a new workout for</DialogTitle>
+                <DialogTitle>Add a new workout for {data.firstname} {data.lastname} </DialogTitle> {/*SDisplay also name of the selected customer in the headline*/}
                 <DialogContent>
                     <DialogContentText>Fill in all information and press save. Select cancel to exit witout daving.</DialogContentText>
-                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fi">
+                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fi"> {/*Setting locale to Finland, so that week starts from monday*/}
                         <DateTimePicker
                             ampm={false}
                             inputFormat="DD.MM.YYYY HH:mm"
@@ -65,14 +66,6 @@ export default function AddTrainingCustomer({data, handleSave}) {
                             onChange={(date) => setTraining({ ...trainig, date: date.toISOString() })}
                         />
                     </LocalizationProvider>
-                    <TextField
-                    required
-                    margin="dense"
-                    fullWidth
-                    variant="standard" 
-                    label ="Date and TIme" 
-                    value={trainig.date}
-                    />
                     <TextField
                     required
                     margin="dense"

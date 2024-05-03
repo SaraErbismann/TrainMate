@@ -10,8 +10,6 @@ import {
 import { useState } from "react";
 
 export default function AddCustomer({handleSave}) {
-
-
     
     //State for add customer dialog box open/closed
     const [addDialogOpen, setAddDialogOpen] = useState(false); 
@@ -27,15 +25,18 @@ export default function AddCustomer({handleSave}) {
         phone: ''
     });
 
+    //callback function to set dialog box open
     const handleClickOpen = () => {
         setAddDialogOpen(true);
     }
 
+    //State for storing trainig
     const handleClickClose = () => {
         setAddDialogOpen(false);
         console.log("PING: handle click close: " + addDialogOpen);
     }
 
+    //callback function to call handleSave function and close dialog box when save is clicked
     const handleClickSave = () => {
         handleSave(customer)
         handleClickClose();
