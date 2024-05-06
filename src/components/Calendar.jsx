@@ -66,7 +66,7 @@ export default function Calendar() {
     };
 
     const eventStyle = {
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.secondary.light,
     };
 
     return(
