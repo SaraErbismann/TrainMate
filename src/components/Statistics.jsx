@@ -51,7 +51,7 @@ export default function Statistics() {
         <>
             <Card sx={{ mb: 2 }}>
                 <Stack
-                direction="row"
+                direction={{ xs: 'column', md: 'row' }}
                 justifyContent="center"
                 alignItems="center"
                 spacing={2}

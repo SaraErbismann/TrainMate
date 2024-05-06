@@ -30,7 +30,7 @@ export default function Navbar() {
     return (
         <div className='App'>
             {/* App bar start */}
-            <AppBar position="static" sx={{ backgroundColor: '#FFFFFF', color: theme.palette.primary.main }}>
+            <AppBar position="static" sx={{ backgroundColor: '#FFFFFF', color: theme.palette.primary.main}}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         {/* If screen is mobile, render menu icon */}

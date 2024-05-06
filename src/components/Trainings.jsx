@@ -69,7 +69,7 @@ export default function Trainings() {
         <>
             <Card sx={{ mb: 2 }} >
                 <Stack
-                direction="row"
+                direction={{ xs: 'column', md: 'row' }}
                 justifyContent="center"
                 alignItems="center"
                 spacing={2}
