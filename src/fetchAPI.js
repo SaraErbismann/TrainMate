@@ -1,8 +1,6 @@
 
 //CUSTOMERS
 
-
-
 export const fetchCustomers = () => {
     return fetch(import.meta.env.VITE_API_URL_CUSTOMERS)
         .then(response => {
@@ -71,6 +69,18 @@ export const handleDeleteCustomers = (url) => {
 }
 
 // TRAININGS
+
+export const fetchTrainings = () => {
+    return fetch(import.meta.env.VITE_API_URL_TRAININGS)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error in fething data: " + response.statusText);
+            } else {
+                return response.json();
+            }
+        })
+}
+
 export const handleAddTrainingToCustomer = (newTraining) => {
     return fetch(import.meta.env.VITE_API_URL_TRAININGS, {
         method: 'POST',

@@ -6,6 +6,7 @@ import Trainings from './components/Trainings';
 import Customers from './components/Customers';
 import Error from './components/Error.jsx';
 import Calendar from './components/Calendar.jsx';
+import Statistics from './components/Statistics.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: 'calendar',
         element: <Calendar />
+      },
+      {
+        path: 'statistics',
+        element: <Statistics />
       }
     ]
   }
@@ -43,7 +48,7 @@ const theme = createTheme({
     },
     secondary: {
       main: '#899481', // Dark secondary colour
-      light: '#e07d54', // Light secondary colour
+      light: '#F6B300', // Light secondary colour
     },
   },
   typography: {

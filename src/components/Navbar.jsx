@@ -76,6 +76,9 @@ export default function Navbar() {
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Link to={"/calendar"} style={{ textDecoration: 'none', color: 'inherit' }}>Calendar</Link>
                             </MenuItem>
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Link to={"/statistics"} style={{ textDecoration: 'none', color: 'inherit' }}>Statistics</Link>
+                            </MenuItem>
                         </Menu>
                         {/* App name in menu */}
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -93,6 +96,7 @@ export default function Navbar() {
                             <Typography style={{ textDecoration: 'none', color: 'inherit' }} variant="body1" component={Link} to={"/trainings"}>Trainings</Typography>
                             <Typography style={{ textDecoration: 'none', color: 'inherit' }} variant="body1" component={Link} to={"/customers"}>Customers</Typography>
                             <Typography style={{ textDecoration: 'none', color: 'inherit' }} variant="body1" component={Link} to={"/calendar"}>Calendar</Typography>
+                            <Typography style={{ textDecoration: 'none', color: 'inherit' }} variant="body1" component={Link} to={"/statistics"}>Statistics</Typography>
                         </Stack>
                     </Toolbar>
                 </Container>

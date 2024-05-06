@@ -3,8 +3,7 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState, useEffect } from "react";
 import { fetchTrainingsWithCustomers } from "../fetchAPI";
-import { 
-    Paper, 
+import {  
     Typography, 
     useTheme,     
     Card,
@@ -40,8 +39,8 @@ export default function Calendar() {
     //function to format the events shown in the calendar
     const formatEvents = (event) => {
         return event.map(event => {
-            const firstName = event.customer.firstname || "Name missing"; //set up first name of the customer for the event or name missing if there is no name
-            const lastName = event.customer.lastname || "Name missing"; //set up last name of the customer for the event or name missing if there is no name
+            const firstName = event.customer?.firstname || "Name missing"; //set up first name of the customer for the event or name missing if there is no name
+            const lastName = event.customer?.lastname || "Name missing"; //set up last name of the customer for the event or name missing if there is no name
     
             //return formatted event with name details, event start time and event end time
             return {
@@ -72,42 +71,42 @@ export default function Calendar() {
 
     return(
         <>
-        <Card>
-            <Stack
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-            spacing={2}
-            >
+            <Card sx={{ mb: 2 }}>
                 <Stack
-                direction="column"
+                direction="row"
                 justifyContent="center"
                 alignItems="center"
-                spacing={0}
+                spacing={2}
                 >
-                    <CardMedia
-                    style={{ width: '300px'}}
-                    image={time_img}
-                    title = "Workout illustration"
-                    component="img"
-                    />
-                    <Typography variant="caption" align="center">
-                        <a href="https://www.freepik.com/free-vector/clock-concept-illustration_33756169.htm#page=6&position=9&from_view=author&uuid=f144860b-459b-46cd-81c0-7ba1aa31a61f">
-                            Image by storyset on Freepik
-                        </a>
-                    </Typography>
+                    <Stack
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    spacing={0}
+                    >
+                        <CardMedia
+                        style={{ width: '300px'}}
+                        image={time_img}
+                        title = "Clock illustration"
+                        component="img"
+                        />
+                        <Typography variant="caption" align="center">
+                            <a href="https://www.freepik.com/free-vector/clock-concept-illustration_33756169.htm#page=6&position=9&from_view=author&uuid=f144860b-459b-46cd-81c0-7ba1aa31a61f">
+                                Image by storyset on Freepik
+                            </a>
+                        </Typography>
+                    </Stack>
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                            Step into our Trainings page! 
+                        </Typography>
+                        <Typography variant="body1">
+                            Explore your list of trainings alongside customer details, and effortlessly delete any outdated entries. Simplify your workflow and stay on track with your training sessions effortlessly.   
+                        </Typography>
+                    </CardContent>
                 </Stack>
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Step into our Trainings page! 
-                    </Typography>
-                    <Typography variant="body1">
-                        Explore your list of trainings alongside customer details, and effortlessly delete any outdated entries. Simplify your workflow and stay on track with your training sessions effortlessly.   
-                    </Typography>
-                </CardContent>
-            </Stack>
-        </Card>
-        <Paper>
+            </Card>
+
             <BigCalendar
             localizer={localizer}
             events={calendarEvents}
@@ -119,7 +118,6 @@ export default function Calendar() {
             style={{ margin: "20px", height: 600, fontFamily: theme.typography.fontFamily }}
             eventPropGetter={() => ({ style: eventStyle })}
             />
-        </Paper>
 
         </>
     );
