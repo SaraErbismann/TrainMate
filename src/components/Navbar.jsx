@@ -2,12 +2,14 @@ import { useState } from 'react';
 import {
     AppBar, Toolbar, IconButton, 
     Typography, Menu, MenuItem, 
-    Container, Stack, useMediaQuery
+    Container, Stack, useMediaQuery, useTheme
 }  from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, Outlet } from 'react-router-dom';
 
 export default function Navbar() {
+    //Add theme colours
+    const theme = useTheme();
     
     //Sate to manage anchor element for responsive menu
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -28,7 +30,7 @@ export default function Navbar() {
     return (
         <div className='App'>
             {/* App bar start */}
-            <AppBar position="static">
+            <AppBar position="static" sx={{ backgroundColor: '#FFFFFF', color: theme.palette.primary.main }}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         {/* If screen is mobile, render menu icon */}

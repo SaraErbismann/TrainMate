@@ -4,7 +4,6 @@ import {
     IconButton, 
     useTheme,     
     Card,
-    CardActions,
     CardContent,
     CardMedia,
     Stack 
