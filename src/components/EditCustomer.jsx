@@ -6,12 +6,16 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
-    IconButton
+    IconButton,
+    useTheme
 } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from "react";
 
 export default function EditCustomer({data, updateCustomer}) {
+
+    //Add theme colours
+    const theme = useTheme();
     
     //State for edit customer dialog box open/closed
     const [editDialogOpen, setEditDialogOpen] = useState(false); 
@@ -52,7 +56,7 @@ export default function EditCustomer({data, updateCustomer}) {
 
     return(
         <>
-            <IconButton variant="outlined" size="small" onClick={handleClickOpen}>
+            <IconButton variant="outlined" size="small" onClick={handleClickOpen} style={{ color: theme.palette.secondary.light }}>
                 <EditIcon />
             </IconButton>
             <Dialog 
