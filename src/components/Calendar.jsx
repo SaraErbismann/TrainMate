@@ -3,7 +3,17 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState, useEffect } from "react";
 import { fetchTrainingsWithCustomers } from "../fetchAPI";
-import { Paper, Typography, useTheme } from "@mui/material";
+import { 
+    Paper, 
+    Typography, 
+    useTheme,     
+    Card,
+    CardActions,
+    CardContent,
+    CardMedia,
+    Stack 
+} from "@mui/material";
+import time_img from '../assets/time_img.jpg';
 
 
 export default function Calendar() {
@@ -63,7 +73,41 @@ export default function Calendar() {
 
     return(
         <>
-        <Typography>This is calendar page</Typography>
+        <Card>
+            <Stack
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            spacing={2}
+            >
+                <Stack
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+                spacing={0}
+                >
+                    <CardMedia
+                    style={{ width: '300px'}}
+                    image={time_img}
+                    title = "Workout illustration"
+                    component="img"
+                    />
+                    <Typography variant="caption" align="center">
+                        <a href="https://www.freepik.com/free-vector/clock-concept-illustration_33756169.htm#page=6&position=9&from_view=author&uuid=f144860b-459b-46cd-81c0-7ba1aa31a61f">
+                            Image by storyset on Freepik
+                        </a>
+                    </Typography>
+                </Stack>
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Step into our Trainings page! 
+                    </Typography>
+                    <Typography variant="body1">
+                        Explore your list of trainings alongside customer details, and effortlessly delete any outdated entries. Simplify your workflow and stay on track with your training sessions effortlessly.   
+                    </Typography>
+                </CardContent>
+            </Stack>
+        </Card>
         <Paper>
             <BigCalendar
             localizer={localizer}

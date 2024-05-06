@@ -1,4 +1,14 @@
-import { Typography, Paper, IconButton, useTheme } from "@mui/material";
+import { 
+    Typography, 
+    Paper, 
+    IconButton, 
+    useTheme,     
+    Card,
+    CardActions,
+    CardContent,
+    CardMedia,
+    Stack 
+} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { fetchTrainingsWithCustomers, handleDeleteTraining } from "../fetchAPI";
 import { useEffect, useState } from "react";
@@ -6,6 +16,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 import dayjs from 'dayjs';
+import workout_img_2 from '../assets/workout_img_2.jpg';
 
 // Function for formatting dates in the grid
 const dateFormatter = (dateOldFormat) => {
@@ -58,7 +69,41 @@ export default function Trainings() {
 
     return(
         <>
-       <Paper><Typography variant="h1">This is a list of trainings</Typography></Paper>
+        <Card>
+            <Stack
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              spacing={2}
+            >
+                <Stack
+                  direction="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  spacing={0}
+                >
+                    <CardMedia
+                        style={{ width: '400px'}}
+                        image={workout_img_2}
+                        title = "Workout illustration"
+                        component="img"
+                    />
+                    <Typography variant="caption" align="center">
+                        <a href="https://www.freepik.com/free-vector/healthy-lifestyle-concept-illustration_22378356.htm#fromView=image_search_similar&page=1&position=5&uuid=73bbe615-8dda-457a-b6a2-f2cf415aef59">
+                        Image by storyset on Freepik
+                        </a>
+                    </Typography>
+                </Stack>
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Step into our Trainings page! 
+                    </Typography>
+                    <Typography variant="body1">
+                        Explore your list of trainings alongside customer details, and effortlessly delete any outdated entries. Simplify your workflow and stay on track with your training sessions effortlessly.   
+                    </Typography>
+                </CardContent>
+            </Stack>
+        </Card>
        <Paper>
             <div className="ag-theme-material" style={{ height: 600 }}>
                 <AgGridReact

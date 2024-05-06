@@ -3,7 +3,12 @@ import {
     Typography, 
     Button,
     IconButton,
-    useTheme
+    useTheme,
+    Card,
+    CardActions,
+    CardContent,
+    CardMedia,
+    Stack
 } from "@mui/material";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
@@ -16,6 +21,7 @@ import AddTrainingCustomer from "./AddTrainingCustomer";
 import DeleteIcon from '@mui/icons-material/Delete';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { CSVLink } from "react-csv";
+import workout_img_1 from '../assets/workout_img_1.jpg';
 
 
 export default function Customers() {
@@ -111,13 +117,47 @@ export default function Customers() {
 
     return(
         <>
-        <Paper>
-            <Typography variant="h1">This is a list of customers</Typography>
+        <Card>
+            <Stack
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            spacing={2}
+            >
+                <Stack
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+                spacing={0}
+                >
+                    <CardMedia
+                    style={{ width: '400px'}}
+                    image={workout_img_1}
+                    title = "Workout illustration"
+                    component="img"
+                    />
+                    <Typography variant="caption" align="center">
+                        <a href="https://www.freepik.com/free-vector/stretching-exercises-concept-illustration_25182825.htm#fromView=search&page=2&position=26&uuid=73bbe615-8dda-457a-b6a2-f2cf415aef59">
+                            Image by storyset on Freepik
+                        </a>
+                    </Typography>
+                </Stack>
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Welcome to our Customers page! 
+                    </Typography>
+                    <Typography variant="body1">
+                        Here, you can effortlessly manage your customer list, add new customers, schedule trainings, and even export your customer data as CSV. Dive in and streamline your customer interactions with ease.   
+                    </Typography>
+                </CardContent>
+            </Stack>
+            <CardActions>
             <AddCustomer handleSave={addCustomer} />
             <CSVLink data={exportData} filename="Customer_Data.csv" >
                 <Button variant="outlined" startIcon={<FileDownloadIcon />} style={{ color: theme.palette.secondary.light }}>Export</Button>
-            </CSVLink> 
-        </Paper>
+            </CSVLink>
+            </CardActions>
+        </Card>
         <Paper>            
             <div className="ag-theme-material" style={{ height: 600 }}>
                 <AgGridReact
