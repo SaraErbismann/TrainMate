@@ -39,12 +39,18 @@ const router = createBrowserRouter([
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#304f6d', // Your primary color
+      main: '#304f6d', // Primary colour
     },
     secondary: {
-      main: '#899481', // Your first secondary color
-      light: '#e07d54', // Your second secondary color
+      main: '#899481', // Dark secondary colour
+      light: '#e07d54', // Light secondary colour
     },
+  },
+  typography: {
+    fontFamily: [
+      'Roboto', // set up theme fint
+      'sans-serif', // Fallback font 
+    ].join(','),
   },
 });
 

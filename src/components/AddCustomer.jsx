@@ -5,12 +5,16 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle
+    DialogTitle,
+    useTheme
 } from "@mui/material";
 import { useState } from "react";
 import AddIcon from '@mui/icons-material/Add';
 
 export default function AddCustomer({handleSave}) {
+    
+    //Add theme colours
+    const theme = useTheme();
     
     //State for add customer dialog box open/closed
     const [addDialogOpen, setAddDialogOpen] = useState(false); 
@@ -48,7 +52,7 @@ export default function AddCustomer({handleSave}) {
 
     return(
         <>
-            <Button variant="outlined" onClick={handleClickOpen} startIcon={<AddIcon/>}>
+            <Button variant="outlined" onClick={handleClickOpen} startIcon={<AddIcon/>} style={{ color: theme.palette.secondary.light }}>
                 Add new
             </Button>
             <Dialog 

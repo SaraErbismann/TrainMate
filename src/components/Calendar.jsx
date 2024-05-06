@@ -3,10 +3,13 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState, useEffect } from "react";
 import { fetchTrainingsWithCustomers } from "../fetchAPI";
-import { Paper, Typography } from "@mui/material";
+import { Paper, Typography, useTheme } from "@mui/material";
 
 
 export default function Calendar() {
+
+    //Add theme colours
+    const theme = useTheme();
 
     const localizer = momentLocalizer(moment);
     
@@ -54,6 +57,10 @@ export default function Calendar() {
             localizer.format(end, 'H:mm', culture)
     };
 
+    const eventStyle = {
+        backgroundColor: theme.palette.primary.main,
+    };
+
     return(
         <>
         <Typography>This is calendar page</Typography>
@@ -66,7 +73,8 @@ export default function Calendar() {
             views={['month', 'week', 'day']}
             formats={calendarFormat}
             defaultView="month"
-            style={{ margin: "20px", height: 600, font: "Roboto" }}
+            style={{ margin: "20px", height: 600, fontFamily: theme.typography.fontFamily }}
+            eventPropGetter={() => ({ style: eventStyle })}
             />
         </Paper>
 

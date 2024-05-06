@@ -1,4 +1,4 @@
-import { Typography, Paper, IconButton } from "@mui/material";
+import { Typography, Paper, IconButton, useTheme } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { fetchTrainingsWithCustomers, handleDeleteTraining } from "../fetchAPI";
 import { useEffect, useState } from "react";
@@ -15,6 +15,9 @@ const dateFormatter = (dateOldFormat) => {
 
 export default function Trainings() {
 
+    //Add theme colours
+    const theme = useTheme();
+
     //State to store training list data
     const [trainigsCustData, setTrainingsCustData] = useState([]);
 
@@ -29,7 +32,8 @@ export default function Trainings() {
             cellRenderer: params => 
             <IconButton size="small" 
                 color="error" 
-                onClick={() => deleteTraining(params.data.id)}>
+                onClick={() => deleteTraining(params.data.id)}
+                style={{ color: theme.palette.secondary.dark }}>
                 <DeleteIcon />
             </IconButton>, width: 90, headerName: 'Delete'
         }

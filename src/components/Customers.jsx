@@ -2,7 +2,8 @@ import {
     Paper, 
     Typography, 
     Button,
-    IconButton
+    IconButton,
+    useTheme
 } from "@mui/material";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
@@ -18,6 +19,9 @@ import { CSVLink } from "react-csv";
 
 
 export default function Customers() {
+
+    //Add theme colours
+    const theme = useTheme();
 
     //State to store customer data
     const [customerData, setCustomerData] = useState([]);
@@ -44,7 +48,8 @@ export default function Customers() {
             cellRenderer: params => 
             <IconButton size="small" 
                 color="error" 
-                onClick={() => deleteCustomer(params.data._links.customer.href)}> 
+                onClick={() => deleteCustomer(params.data._links.customer.href)}
+                style={{ color: theme.palette.secondary.dark }}> 
                 <DeleteIcon />
             </IconButton>, width: 85, headerName: 'Delete'
         }
@@ -90,6 +95,7 @@ export default function Customers() {
         .catch(err => console.error(err))
     }
 
+    //set csv file column names and map data to the right columns
     const exportData = [
         ['Firstname', 'Lastname', 'Streetaddress', 'Postcode', 'City', 'Email', 'Phone'],
         ...customerData.map(({ firstname, lastname, streetaddress, postcode, city, email, phone }) => [
@@ -109,7 +115,7 @@ export default function Customers() {
             <Typography variant="h1">This is a list of customers</Typography>
             <AddCustomer handleSave={addCustomer} />
             <CSVLink data={exportData} filename="Customer_Data.csv" >
-                <Button variant="outlined" startIcon={<FileDownloadIcon />}>Export</Button>
+                <Button variant="outlined" startIcon={<FileDownloadIcon />} style={{ color: theme.palette.secondary.light }}>Export</Button>
             </CSVLink> 
         </Paper>
         <Paper>            

@@ -6,7 +6,8 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
-    IconButton
+    IconButton,
+    useTheme
 } from "@mui/material";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -17,6 +18,8 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 export default function AddTrainingCustomer({data, handleSave}) {
 
+    //Add theme colours
+    const theme = useTheme();
     
     //State for dialog box to be open/closed
     const [dialogOpen, setDialogOpen] = useState(false); 
@@ -47,7 +50,7 @@ export default function AddTrainingCustomer({data, handleSave}) {
 
     return(
         <>
-            <IconButton variant="outlined" onClick={handleClickOpen} >
+            <IconButton variant="outlined" onClick={handleClickOpen} style={{ color: theme.palette.secondary.light }}>
                 <AddCircleOutlineIcon/>
             </IconButton>
             <Dialog 
