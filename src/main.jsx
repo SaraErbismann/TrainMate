@@ -7,11 +7,11 @@ import Customers from './components/Customers';
 import Error from './components/Error.jsx';
 import Calendar from './components/Calendar.jsx';
 import Statistics from './components/Statistics.jsx';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { RouterProvider, createHashRouter } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // create BrowseRouter usint the createBrowseRouter function
-const router = createBrowserRouter([
+const router = createHashRouter([
   { //root route to render the App component
     path: "/",
     element: <App />,
@@ -48,7 +48,7 @@ const theme = createTheme({
     },
     secondary: {
       main: '#899481', // Dark secondary colour
-      light: '#F6B300', // Light secondary colour
+      light: '#e07d54', // Light secondary colour
     },
   },
   typography: {
